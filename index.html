@@ -4,14 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="lib/react.min.js"></script>
+  <script src="lib/react-dom.min.js"></script>
+  <script src="lib/JSXTransformer.js"></script>
   <title>React Fundamental</title>
 </head>
 <body>
   <div id="container"></div>
 
-  <script src="lib/react.min.js"></script>
-  <script src="lib/react-dom.min.js"></script>
-  <script src="lib/JSXTransformer.js"></script>
   <!-- <script type="text/jsx" src="script.jsx"></script> -->
   <script type="text/jsx">
   /** @jsx React.Dom */
@@ -26,27 +26,5 @@
   ReactDOM.render(<Hello now={new Date().toString()} />, document.getElementById('container'));
 
   </script>
-
-  <!-- <script type="text/jsx">
-
-  // class Welcome extends React.Component {
-  //   render() {
-  //     return <h1>Hello, {this.props.now}</h1>;
-  //   }
-  // }
-
-  /** @jsx React.Dom */
-  var Hello = React.Component({
-    render: function () {
-      return <div>
-                <h1>Hello at {this.props.now}</h1>
-             </div>;
-    }
-  });
-
-  ReactDom.render(<Hello />, document.getElementById('container'));
-  // ReactDom.render(<Hello now={new Date().toString()} />, document.getElementById('container'));
-
-  </script> -->
 </body>
 </html>
