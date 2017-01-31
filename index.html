@@ -24,6 +24,22 @@
   });
 
   var Button = React.createClass({
+    render: function() {
+      return (
+        <button onClick={this.props.localHandleClick}>+{this.props.localCounter}</button>
+      )
+    }
+  });
+
+  var Result = React.createClass({
+    render: function() {
+      return (
+        <div>{this.props.localCounter}</div>
+      )
+    }
+  });
+
+  var Main = React.createClass({
     getInitialState: function() {
       return {counter: 0}
     },
@@ -34,26 +50,10 @@
 
     render: function() {
       return (
-        <button onClick={this.handleClick}>{this.state.counter}</button>
-      )
-    }
-  });
-
-  var Result = React.createClass({
-    render: function() {
-      return (
-        <div>XXX</div>
-      )
-    }
-  });
-
-  var Main = React.createClass({
-    render: function() {
-      return (
         <div>
           <Hello now={new Date().toString()} />
-          <Button />
-          <Result />
+          <Button localHandleClick={this.handleClick} localCounter={this.state.counter}/>
+          <Result localCounter={this.state.counter} />
         </div>
       )
     }
