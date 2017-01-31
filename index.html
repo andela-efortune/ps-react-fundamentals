@@ -23,7 +23,7 @@
 
     componentDidMount() {
       // let component = this;
-      $.get("https://api.github.com/users/andela-efortune", (data) => {
+      $.get("https://api.github.com/users/" + this.props.login, (data) => {
         this.setState(data);
         // component.setState(data);
       })
@@ -32,7 +32,7 @@
     render() {
       return (
         <div>
-          <img src={this.state.avatar_url} alt="Github gravatar"/>
+          <img src={this.state.avatar_url} alt="Github gravatar" width="80px"/>
           <h3>{ this.state.name }</h3>
           <hr/>
         </div>
@@ -40,11 +40,30 @@
     }
   });
 
-  const Main = React.createClass({
+  const Form = React.createClass({
     render() {
       return (
+        <form>
+          <input placeholder="Enter Github username"/>
+          <button>Add</button>
+        </form>
+      );
+    }
+  })
+
+  const Main = React.createClass({
+    getInitialState() {
+      return { logins: [] }
+    },
+
+    render() {
+      const cards = this.state.logins.map((login) => {
+        return <Cards login={login}/>
+      })
+      return (
           <div>
-            <Cards />
+            <Form />
+            { cards }
           </div>
       );
     }
