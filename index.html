@@ -16,11 +16,22 @@
   <!-- <script type="text/jsx" src="script.jsx"></script> -->
   <script type="text/jsx">
 
+  /**
+   * Cards React Class
+   * gets users github gravatar and name
+   * displays it to the user in Cards
+   */
   const Cards = React.createClass({
+    // Initial state of the component
     getInitialState() {
       return {};
     },
 
+    /**
+     * the lifecycle hook
+     * makes an ajax request to get
+     * data
+     */
     componentDidMount() {
       // let component = this;
       $.get("https://api.github.com/users/" + this.props.login, (data) => {
@@ -29,6 +40,10 @@
       })
     },
 
+    /**
+     * Renders the gravatar and the
+     * name of the Github User.
+     */
     render() {
       return (
         <div>
@@ -40,29 +55,46 @@
     }
   });
 
+  /**
+   * Colloects userInput and passes it to
+   * addCard method that triggers the addCard
+   * method of the Main component.
+   */
   const Form = React.createClass({
+    handleSubmit(e) {
+      e.preventDefault();
+      const userInput = this.refs.username;
+      this.props.addCard(userInput.value);
+      userInput.value = '';
+    },
+
     render() {
       return (
-        <form>
-          <input placeholder="Enter Github username"/>
+        <form onSubmit={this.handleSubmit}>
+          <input placeholder="Enter Github username" ref="username"/>
           <button>Add</button>
         </form>
       );
     }
   })
 
+  // Main component
   const Main = React.createClass({
     getInitialState() {
       return { logins: [] }
     },
 
+    addCard(userInput) {
+      this.setState({logins: this.state.logins.concat(userInput)});
+    },
+
     render() {
       const cards = this.state.logins.map((login) => {
-        return <Cards login={login}/>
+        return <Cards login={login} />
       })
       return (
           <div>
-            <Form />
+            <Form addCard={this.addCard} />
             { cards }
           </div>
       );
