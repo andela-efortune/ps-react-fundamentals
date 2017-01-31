@@ -14,67 +14,27 @@
 
   <!-- <script type="text/jsx" src="script.jsx"></script> -->
   <script type="text/jsx">
-  /** @jsx React.Dom */
-  var Hello = React.createClass({
-    render: function () {
-      return <div>
-                <h1>Hello at {this.props.now}</h1>
-             </div>;
-    }
-  });
 
-  var Button = React.createClass({
-    localHandleClick: function () {
-      return this.props.localHandleClick(1);
-    },
+  const Cards = React.createClass({
 
-    render: function() {
+    render() {
       return (
-        <button onClick={this.localHandleClick}>+{this.props.localCounter}</button>
-      );
-    }
-  });
-
-  var Result = React.createClass({
-    render: function() {
-      return (
-        <div>{this.props.localCounter}</div>
-      );
-    }
-  });
-
-  var ButtonIncrement = React.createClass({
-    localHandleClick: function () {
-        return this.props.localHandleClick(this.props.incrementBy);
-    },
-
-    render: function () {
-      return (
-        <button onClick={this.localHandleClick}>+{this.props.incrementBy}</button>
-      );
+        <div>
+          <img src="" alt="Github gravatar"/>
+          <h3>Name here</h3>
+          <hr/>
+        </div>
+      )
     }
   })
 
-  var Main = React.createClass({
-    getInitialState: function() {
-      return {counter: 0}
-    },
+  const Main = React.createClass({
 
-    handleClick: function(incrementBy) {
-      this.setState({ counter: this.state.counter + incrementBy })
-    },
-
-    render: function() {
+    render() {
       return (
-        <div>
-          <Hello now={new Date().toString()} />
-          <Button localHandleClick={this.handleClick} localCounter={this.state.counter}/>
-          <ButtonIncrement localHandleClick={this.handleClick} incrementBy={2}/>
-          <ButtonIncrement localHandleClick={this.handleClick} incrementBy={5}/>
-          <ButtonIncrement localHandleClick={this.handleClick} incrementBy={10}/>
-          <ButtonIncrement localHandleClick={this.handleClick} incrementBy={100}/>
-          <Result localCounter={this.state.counter} />
-        </div>
+          <div>
+            <Cards />
+          </div>
       )
     }
   })
