@@ -7,6 +7,7 @@
   <script src="lib/react.min.js"></script>
   <script src="lib/react-dom.min.js"></script>
   <script src="lib/JSXTransformer.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <title>React Fundamental</title>
 </head>
 <body>
@@ -16,28 +17,39 @@
   <script type="text/jsx">
 
   const Cards = React.createClass({
+    getInitialState() {
+      return {};
+    },
+
+    componentDidMount() {
+      // let component = this;
+      $.get("https://api.github.com/users/andela-efortune", (data) => {
+        this.setState(data);
+        // component.setState(data);
+      })
+    },
 
     render() {
       return (
         <div>
-          <img src="" alt="Github gravatar"/>
-          <h3>Name here</h3>
+          <img src={this.state.avatar_url} alt="Github gravatar"/>
+          <h3>{ this.state.name }</h3>
           <hr/>
         </div>
-      )
+      );
     }
-  })
+  });
 
   const Main = React.createClass({
-
     render() {
       return (
           <div>
             <Cards />
           </div>
-      )
+      );
     }
-  })
+  });
+
   ReactDOM.render(<Main />, document.getElementById('container'));
 
   </script>
