@@ -1,12 +1,18 @@
 const StarFrame = React.createClass({
   render() {
+    let numOfStars = Math.floor(Math.random() * 9) + 1;
+
+    let stars = [];
+    for (let i = 0; i < numOfStars; i++) {
+      stars.push(
+        <span className="glyphicon glyphicon-star"></span>
+      );
+    }
+
     return (
       <div id="star-frame">
         <div className="well">
-        <span className="glyphicon glyphicon-star"></span>
-        <span className="glyphicon glyphicon-star"></span>
-        <span className="glyphicon glyphicon-star"></span>
-        <span className="glyphicon glyphicon-star"></span>
+          { stars }
         </div>
       </div>
     );
