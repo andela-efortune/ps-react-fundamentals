@@ -29,7 +29,7 @@ const ButtonFrame = React.createClass({
   }
 });
 
-AnswerFrame = React.createClass({
+const AnswerFrame = React.createClass({
   render() {
     return (
       <div id="answer-frame">
@@ -40,6 +40,25 @@ AnswerFrame = React.createClass({
     );
   }
 });
+
+const NumbersFrame = React.createClass({
+  render() {
+    let numbers = [];
+
+    for (let i = 1; i <= 9; i++) {
+      numbers.push(
+        <div className="number">{i}</div>
+      );
+    }
+    return (
+      <div className="well">
+        <div id="numbers-frame">
+          {numbers}
+        </div>
+      </div>
+    )
+  }
+})
 
 const Game = React.createClass({
   render() {
@@ -52,6 +71,8 @@ const Game = React.createClass({
           <ButtonFrame />
           <AnswerFrame />
         </div>
+
+        <NumbersFrame />
       </div>
     );
   }
