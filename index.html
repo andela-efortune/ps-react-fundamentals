@@ -12,109 +12,19 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
     integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
       crossorigin="anonymous">
-  <!-- Latest compiled and minified JavaScript -->
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-      crossorigin="anonymous"></script>
-  <script src="lib/react.min.js"></script>
-  <script src="lib/react-dom.min.js"></script>
-  <script src="lib/JSXTransformer.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <title>React Fundamental</title>
 </head>
 <body>
-  <div id="container"></div>
+  <div id="container" class="container"></div>
 
-  <!-- <script type="text/jsx" src="script.jsx"></script> -->
-  <script type="text/jsx">
 
-  /**
-   * Cards React Class
-   * gets users github gravatar and name
-   * displays it to the user in Cards
-   */
-  const Cards = React.createClass({
-    // Initial state of the component
-    getInitialState() {
-      return {};
-    },
-
-    /**
-     * the lifecycle hook
-     * makes an ajax request to get
-     * data
-     */
-    componentDidMount() {
-      // let component = this;
-      $.get("https://api.github.com/users/" + this.props.login, (data) => {
-        this.setState(data);
-        // component.setState(data);
-      })
-    },
-
-    /**
-     * Renders the gravatar and the
-     * name of the Github User.
-     */
-    render() {
-      return (
-        <div>
-          <img src={this.state.avatar_url} alt="Github gravatar" width="80px"/>
-          <h3>{ this.state.name }</h3>
-          <hr/>
-        </div>
-      );
-    }
-  });
-
-  /**
-   * Colloects userInput and passes it to
-   * addCard method that triggers the addCard
-   * method of the Main component.
-   */
-  const Form = React.createClass({
-    handleSubmit(e) {
-      e.preventDefault();
-      const userInput = this.refs.username;
-      this.props.addCard(userInput.value);
-      userInput.value = '';
-    },
-
-    render() {
-      return (
-        <form onSubmit={this.handleSubmit}>
-          <input placeholder="Enter Github username" ref="username"/>
-          <button>Add</button>
-        </form>
-      );
-    }
-  })
-
-  // Main component
-  const Main = React.createClass({
-    getInitialState() {
-      return { logins: [] }
-    },
-
-    addCard(userInput) {
-      this.setState({logins: this.state.logins.concat(userInput)});
-    },
-
-    render() {
-      const cards = this.state.logins.map((login) => {
-        return <Cards login={login} />
-      })
-      return (
-          <div>
-            <Form addCard={this.addCard} />
-            { cards }
-          </div>
-      );
-    }
-  });
-
-  ReactDOM.render(<Main />, document.getElementById('container'));
-
-  </script>
+  <script src="lib/react.min.js"></script>
+  <script src="lib/react-dom.min.js"></script>
+  <script src="lib/JSXTransformer.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+    integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+      crossorigin="anonymous"></script>
+  <script type="text/jsx" src="script.jsx"></script>
 </body>
 </html>
