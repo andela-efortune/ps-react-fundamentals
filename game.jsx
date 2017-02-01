@@ -17,7 +17,7 @@ const ButtonFrame = React.createClass({
   render() {
     return (
       <div id="btn-frame">
-        ....
+        <button className="btn btn-primary"> = </button>
       </div>
     );
   }
@@ -27,7 +27,9 @@ AnswerFrame = React.createClass({
   render() {
     return (
       <div id="answer-frame">
-        ......
+        <div className="well">
+          ......
+        </div>
       </div>
     );
   }
