@@ -1,9 +1,46 @@
+const StarFrame = React.createClass({
+  render() {
+    return (
+      <div id="star-frame">
+        <div className="well">
+        <span className="glyphicon glyphicon-star"></span>
+        <span className="glyphicon glyphicon-star"></span>
+        <span className="glyphicon glyphicon-star"></span>
+        <span className="glyphicon glyphicon-star"></span>
+        </div>
+      </div>
+    );
+  }
+});
+
+const ButtonFrame = React.createClass({
+  render() {
+    return (
+      <div id="btn-frame">
+        ....
+      </div>
+    );
+  }
+});
+
+AnswerFrame = React.createClass({
+  render() {
+    return (
+      <div id="answer-frame">
+        ......
+      </div>
+    );
+  }
+});
+
 const Game = React.createClass({
   render() {
     return (
       <div id="game">
         <h2>Play Nine</h2>
-
+        <StarFrame />
+        <ButtonFrame />
+        <AnswerFrame />
       </div>
     );
   }
@@ -11,5 +48,5 @@ const Game = React.createClass({
 
 ReactDOM.render(
   <Game />,
-  document.getElementById('container');
+  document.getElementById('container')
 );
