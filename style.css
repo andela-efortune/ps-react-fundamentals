@@ -1,7 +1,7 @@
 #star-frame .glyphicon {
   margin: 0.3em;
   font-size: 1.7em;
-  color: blue;
+  color: green;
 }
 
 #star-frame, #answer-frame {
@@ -24,7 +24,7 @@
   display: inline-block;
   margin: 0.5em;
   width: 30px;
-  background-color: #079;
+  background-color: #086;
   font-size: 22px;
   cursor: pointer;
   text-align: center;
