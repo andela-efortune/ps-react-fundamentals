@@ -1,9 +1,7 @@
 const StarFrame = React.createClass({
   render() {
-    let numOfStars = Math.floor(Math.random() * 9) + 1;
-
     let stars = [];
-    for (let i = 0; i < numOfStars; i++) {
+    for (let i = 0; i < this.props.numOfStars; i++) {
       stars.push(
         <span className="glyphicon glyphicon-star"></span>
       );
@@ -50,12 +48,14 @@ const AnswerFrame = React.createClass({
 
 const NumbersFrame = React.createClass({
   render() {
-    let numbers = [], className, selectedNumbers = this.props.selectedNumbers;
+    let numbers = [], className,
+        clickNumber = this.props.clickNumber,
+        selectedNumbers = this.props.selectedNumbers;
 
     for (let i = 1; i <= 9; i++) {
       className = "number selected-" + (selectedNumbers.indexOf(i) >= 0);
       numbers.push(
-        <div className={className}>{i}</div>
+        <div className={className} onClick={clickNumber.bind(null, i)}>{i}</div>
       );
     }
     return (
@@ -70,7 +70,18 @@ const NumbersFrame = React.createClass({
 
 const Game = React.createClass({
   getInitialState() {
-    return { selectedNumbers: [4, 3] };
+    return {
+            numOfStars: Math.floor(Math.random() * 9) + 1,
+            selectedNumbers: []
+           };
+  },
+
+  clickNumber(clickedNumber) {
+    if (this.state.selectedNumbers.indexOf(clickedNumber) < 0) {
+      this.setState(
+        { selectedNumbers: this.state.selectedNumbers.concat(clickedNumber) }
+      );
+    }
   },
 
   render() {
@@ -79,12 +90,13 @@ const Game = React.createClass({
         <h2>Play Nine</h2>
         <hr/>
         <div className="clearfix">
-          <StarFrame />
+          <StarFrame numOfStars={this.state.numOfStars}/>
           <ButtonFrame />
-          <AnswerFrame selectedNumbers={this.state.selectedNumbers}/>
+          <AnswerFrame selectedNumbers={this.state.selectedNumbers} />
         </div>
 
-        <NumbersFrame selectedNumbers={this.state.selectedNumbers}/>
+        <NumbersFrame selectedNumbers={this.state.selectedNumbers}
+                      clickNumber={this.clickNumber} />
       </div>
     );
   }
