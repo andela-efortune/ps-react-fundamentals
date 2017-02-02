@@ -47,6 +47,10 @@ const ButtonFrame = React.createClass({
     return (
       <div id="btn-frame">
         { button }
+        <br/> <br/>
+        <button className="btn btn-warning btn-xs" onClick={ this.props.redraw }>
+          <span className="glyphicon glyphicon-refresh"></span> &nbsp; { this.props.redraws }
+        </button>
       </div>
     );
   }
@@ -101,6 +105,7 @@ const Game = React.createClass({
             numOfStars: Math.floor(Math.random() * 9) + 1,
             selectedNumbers: [],
             correct: null,
+            redraws: 5,
             usedNumbers: []
            };
   },
@@ -147,7 +152,7 @@ const Game = React.createClass({
 
   acceptAnswer() {
     let usedNumbers = this.state.usedNumbers.concat(this.state.selectedNumbers);
-    
+
     this.setState({
       selectedNumbers: [],
       usedNumbers: usedNumbers,
@@ -156,11 +161,23 @@ const Game = React.createClass({
     })
   },
 
+  redraw() {
+    if (this.state.redraws > 0) {
+      this.setState({
+        numOfStars: Math.floor(Math.random() * 9) + 1,
+        correct: null,
+        selectedNumbers: [],
+        redraws: this.state.redraws - 1
+      });
+    }
+  },
+
   render() {
     let selectedNumbers = this.state.selectedNumbers,
         numOfStars = this.state.numOfStars,
         correct = this.state.correct,
-        usedNumbers = this.state.usedNumbers;
+        usedNumbers = this.state.usedNumbers,
+        redraws = this.state.redraws;
     return (
       <div id="game">
         <h2>Play Nine</h2>
@@ -170,7 +187,9 @@ const Game = React.createClass({
           <ButtonFrame selectedNumbers={selectedNumbers}
                        correct={ correct }
                        checkAnswer={ this.checkAnswer }
-                       acceptAnswer={ this.acceptAnswer } />
+                       acceptAnswer={ this.acceptAnswer }
+                       redraw={ this.redraw }
+                       redraws={ redraws } />
           <AnswerFrame selectedNumbers={selectedNumbers}
                        unselectNumber={this.unselectNumber} />
         </div>
