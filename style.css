@@ -1,0 +1,32 @@
+#star-frame .glyphicon {
+  margin: 0.3em;
+  font-size: 1.7em;
+  color: blue;
+}
+
+#star-frame, #answer-frame {
+  width: 40%;
+  float: left;
+}
+
+#btn-frame {
+  width: 20%;
+  float: left;
+  text-align: center;
+  margin-top: 50px;
+}
+
+#star-frame .well, #answer-frame .well {
+  height: 150px;
+}
+
+#numbers-frame .number {
+  display: inline-block;
+  margin: 0.5em;
+  width: 30px;
+  background-color: #079;
+  font-size: 22px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 50%;
+}
