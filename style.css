@@ -36,3 +36,9 @@
   color: #bbb;
   cursor: not-allowed;
 }
+
+#numbers-frame .used-true {
+  background-color: #e8e8e8;
+  color: #99bb99;
+  cursor: not-allowed;
+}
