@@ -19,10 +19,34 @@ const StarFrame = React.createClass({
 
 const ButtonFrame = React.createClass({
   render() {
-    let disabled = (this.props.selectedNumbers.length === 0);
+    let disabled, button, correct = this.props.correct;
+
+    switch (correct) {
+      case true:
+        button = (
+          <button className="btn btn-success btn-lg" disabled={disabled}>
+            <span className="glyphicon glyphicon-ok"></span>
+          </button>
+        )
+        break;
+      case false:
+        button = (
+          <button className="btn btn-danger btn-lg" disabled={disabled}>
+            <span className="glyphicon glyphicon-remove"></span>
+          </button>
+        )
+        break;
+      default:
+        disabled = (this.props.selectedNumbers.length === 0);
+        button = (
+          <button className="btn btn-default btn-lg" onClick={this.props.checkAnswer} disabled={disabled}> = </button>
+        )
+
+    }
+
     return (
       <div id="btn-frame">
-        <button className="btn btn-success btn-lg" disabled={disabled}> = </button>
+        { button }
       </div>
     );
   }
@@ -73,7 +97,8 @@ const Game = React.createClass({
   getInitialState() {
     return {
             numOfStars: Math.floor(Math.random() * 9) + 1,
-            selectedNumbers: []
+            selectedNumbers: [],
+            correct: null
            };
   },
 
@@ -98,16 +123,30 @@ const Game = React.createClass({
     this.setState({ selectedNumbers: selectedNumbers });
   },
 
+  sumOfSelectedNums() {
+    return this.state.selectedNumbers.reduce((p, n) => {
+      return p + n;
+    }, 0);
+  },
+
+  checkAnswer() {
+    let correct = (this.state.numOfStars === this.sumOfSelectedNums());
+    this.setState({ correct: correct });
+  },
+
   render() {
     let selectedNumbers = this.state.selectedNumbers,
-        numOfStars = this.state.numOfStars;
+        numOfStars = this.state.numOfStars,
+        correct = this.state.correct;
     return (
       <div id="game">
         <h2>Play Nine</h2>
         <hr/>
         <div className="clearfix">
           <StarFrame numOfStars={numOfStars}/>
-          <ButtonFrame selectedNumbers={selectedNumbers} />
+          <ButtonFrame selectedNumbers={selectedNumbers}
+                       correct={ correct }
+                       checkAnswer={ this.checkAnswer }/>
           <AnswerFrame selectedNumbers={selectedNumbers}
                        unselectNumber={this.unselectNumber} />
         </div>
