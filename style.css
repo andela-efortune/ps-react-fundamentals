@@ -17,10 +17,10 @@
 }
 
 #star-frame .well, #answer-frame .well {
-  height: 150px;
+  height: 200px;
 }
 
-#numbers-frame .number {
+#numbers-frame .number, #answer-frame .well span {
   display: inline-block;
   margin: 0.5em;
   width: 30px;
@@ -29,4 +29,10 @@
   cursor: pointer;
   text-align: center;
   border-radius: 50%;
+}
+
+#numbers-frame .selected-true {
+  background-color: #aaffaa;
+  color: #bbb;
+  cursor: not-allowed;
 }
