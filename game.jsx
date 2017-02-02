@@ -19,9 +19,10 @@ const StarFrame = React.createClass({
 
 const ButtonFrame = React.createClass({
   render() {
+    let disabled = (this.props.selectedNumbers.length === 0);
     return (
       <div id="btn-frame">
-        <button className="btn btn-success btn-lg"> = </button>
+        <button className="btn btn-success btn-lg" disabled={disabled}> = </button>
       </div>
     );
   }
@@ -29,7 +30,7 @@ const ButtonFrame = React.createClass({
 
 const AnswerFrame = React.createClass({
   render() {
-    // let props = this.props;
+    // Update selectedNumbers as they change
     let selectedNumbers = this.props.selectedNumbers.map((num) => {
       return (
         <span onClick={this.props.unselectNumber.bind(null, num)}>{num}</span>
@@ -98,18 +99,20 @@ const Game = React.createClass({
   },
 
   render() {
+    let selectedNumbers = this.state.selectedNumbers,
+        numOfStars = this.state.numOfStars;
     return (
       <div id="game">
         <h2>Play Nine</h2>
         <hr/>
         <div className="clearfix">
-          <StarFrame numOfStars={this.state.numOfStars}/>
-          <ButtonFrame />
-          <AnswerFrame selectedNumbers={this.state.selectedNumbers}
-                       unselectNumber={this.unselectNumber}/>
+          <StarFrame numOfStars={numOfStars}/>
+          <ButtonFrame selectedNumbers={selectedNumbers} />
+          <AnswerFrame selectedNumbers={selectedNumbers}
+                       unselectNumber={this.unselectNumber} />
         </div>
 
-        <NumbersFrame selectedNumbers={this.state.selectedNumbers}
+        <NumbersFrame selectedNumbers={selectedNumbers}
                       selectNumber={this.selectNumber} />
       </div>
     );
