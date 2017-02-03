@@ -1,3 +1,21 @@
+const possibleCombinationSum = (arr, n) => {
+  if (arr.indexOf(n) >= 0) { return true; }
+  if (arr[0] > n) { return false; }
+  if (arr[arr.length - 1] > n) {
+    arr.pop();
+    return possibleCombinationSum(arr, n);
+  }
+  let listSize = arr.length, combinationsCount = (1 << listSize)
+  for (let i = 1; i < combinationsCount ; i++ ) {
+    let combinationSum = 0;
+    for (let j=0 ; j < listSize ; j++) {
+      if (i & (1 << j)) { combinationSum += arr[j]; }
+    }
+    if (n === combinationSum) { return true; }
+  }
+  return false;
+};
+
 const StarFrame = React.createClass({
   render() {
     let stars = [];
@@ -173,7 +191,7 @@ const Game = React.createClass({
       usedNumbers: usedNumbers,
       correct: null,
       numOfStars: this.randomNum(),
-    })
+    }, () => this.updateDoneStatus());
   },
 
   redraw() {
@@ -183,7 +201,35 @@ const Game = React.createClass({
         correct: null,
         selectedNumbers: [],
         redraws: this.state.redraws - 1
+      }, () => this.updateDoneStatus());
+    }
+  },
+
+  possibleSolutions() {
+    let numOfStars = this.state.numOfStars,
+        possibleNums = [],
+        usedNumbers = this.state.usedNumbers;
+
+    for (let i = 1; i <= 9; i++) {
+      if (usedNumbers.indexOf(i) < 0) {
+        possibleNums.push(i);
+      }
+    }
+    return possibleCombinationSum(possibleNums, numOfStars);
+  },
+
+  updateDoneStatus() {
+    if (this.state.usedNumbers.length === 9) {
+      this.setState({
+        doneStatus: 'Yeah! You won!'
       });
+      return;
+    }
+
+    if (this.state.redraws === 0 && !this.possibleSolutions()) {
+      this.setState({
+        doneStatus: 'You Lost. Game Over!'
+      })
     }
   },
 
