@@ -1,0 +1,44 @@
+#star-frame .glyphicon {
+  margin: 0.3em;
+  font-size: 1.7em;
+  color: green;
+}
+
+#star-frame, #answer-frame {
+  width: 40%;
+  float: left;
+}
+
+#btn-frame {
+  width: 20%;
+  float: left;
+  text-align: center;
+  margin-top: 50px;
+}
+
+#star-frame .well, #answer-frame .well {
+  height: 200px;
+}
+
+#numbers-frame .number, #answer-frame .well span {
+  display: inline-block;
+  margin: 0.5em;
+  width: 30px;
+  background-color: #086;
+  font-size: 22px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 50%;
+}
+
+#numbers-frame .selected-true {
+  background-color: #aaffaa;
+  color: #bbb;
+  cursor: not-allowed;
+}
+
+#numbers-frame .used-true {
+  background-color: #e8e8e8;
+  color: #99bb99;
+  cursor: not-allowed;
+}
